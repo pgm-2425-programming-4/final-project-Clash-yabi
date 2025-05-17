@@ -17,11 +17,11 @@
     "Color": {
       "type": "string"
     },
-    "Tasks": {
+    "tasks": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::task.task",
-      "mappedBy": "Currentstate"
+      "mappedBy": "currentstate"
     }
   }
 }
