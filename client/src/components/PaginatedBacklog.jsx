@@ -47,7 +47,7 @@ const PaginatedBacklog = () => {
         pageSize={pageSize}
         onPageSizeChange={(size) => {
           setPageSize(size);
-          setCurrentPage(1); // reset naar eerste pagina bij wijziging
+          setCurrentPage(1); 
         }}
       />
     </div>
