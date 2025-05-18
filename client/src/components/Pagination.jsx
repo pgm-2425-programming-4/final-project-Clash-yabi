@@ -1,4 +1,10 @@
-export function Pagination({ currentPage, pageCount, onPageChanged }) {
+export function Pagination({
+  currentPage,
+  pageSize,
+  pageCount,
+  onPageChanged,
+  onPageSizeChange,
+}) {
   let pageNumberArray;
 
   if (pageCount <= 6) {
@@ -72,6 +78,19 @@ export function Pagination({ currentPage, pageCount, onPageChanged }) {
         Next page
       </button>
       <ul className="pagination-list">{pageLinks}</ul>
+      <div className="page-size-select">
+        <label>
+          Tasks per pagina:&nbsp;
+          <select
+            value={pageSize}
+            onChange={(e) => onPageSizeChange(Number(e.target.value))}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+          </select>
+        </label>
+      </div>
     </nav>
   );
 }

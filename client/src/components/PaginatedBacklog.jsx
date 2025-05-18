@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import Backlog from "./Backlog";
 import { Pagination } from "./Pagination";
 
-const fetchTasks = async (page) => {
-  const url = `http://localhost:1337/api/tasks?filters[currentstate][Title][$eq]=Backlog&pagination[page]=${page}&pagination[pageSize]=5&populate=currentstate`;
+const fetchTasks = async (page, pageSize) => {
+  const url = `http://localhost:1337/api/tasks?filters[currentstate][Title][$eq]=Backlog&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=currentstate`;
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -20,10 +20,11 @@ const fetchTasks = async (page) => {
 const PaginatedBacklog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["tasks", currentPage],
-    queryFn: () => fetchTasks(currentPage),
+    queryKey: ["tasks", currentPage, pageSize],
+    queryFn: () => fetchTasks(currentPage,pageSize),
     keepPreviousData: true,
   });
 
@@ -43,6 +44,11 @@ const PaginatedBacklog = () => {
         currentPage={currentPage}
         pageCount={pageCount}
         onPageChanged={setCurrentPage}
+        pageSize={pageSize}
+        onPageSizeChange={(size) => {
+          setPageSize(size);
+          setCurrentPage(1); // reset naar eerste pagina bij wijziging
+        }}
       />
     </div>
   );
