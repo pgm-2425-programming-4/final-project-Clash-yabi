@@ -2,8 +2,8 @@ import React from "react";
 
 const Backlog = ({ tasks }) => {
   return (
-    <table>
-      <thead>
+    <table className="task-table">
+      <thead className="task-header">
         <tr>
           <th>Titel</th>
           <th>Beschrijving</th>
@@ -11,9 +11,9 @@ const Backlog = ({ tasks }) => {
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="task-body">
         {tasks.map((task) => (
-          <tr key={task.id}>
+          <tr key={task.id} className="task-row">
             <td>{task.Title}</td>
             <td>{task.Description}</td>
             <td>{task.Deadline}</td>
