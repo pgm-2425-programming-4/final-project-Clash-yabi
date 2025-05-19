@@ -16,7 +16,7 @@ const Backlog = ({ tasks }) => {
           <tr key={task.id} className="task-row">
             <td>{task.Title}</td>
             <td>{task.Description}</td>
-            <td>{task.Deadline}</td>
+            <td>{new Date(task.Deadline).toLocaleDateString("nl-BE")}</td>
             <td>{task.currentstate?.Title ?? "Geen status"}</td>
           </tr>
         ))}
