@@ -396,7 +396,7 @@ export interface ApiStatusStatus extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    Tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
+    tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
     Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -419,7 +419,7 @@ export interface ApiTaskTask extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Currentstate: Schema.Attribute.Relation<'manyToOne', 'api::status.status'>;
+    currentstate: Schema.Attribute.Relation<'manyToOne', 'api::status.status'>;
     Deadline: Schema.Attribute.Date;
     Description: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;

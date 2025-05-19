@@ -17,11 +17,11 @@
     "Description": {
       "type": "string"
     },
-    "Currentstate": {
+    "currentstate": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::status.status",
-      "inversedBy": "Tasks"
+      "inversedBy": "tasks"
     },
     "Deadline": {
       "type": "date"
