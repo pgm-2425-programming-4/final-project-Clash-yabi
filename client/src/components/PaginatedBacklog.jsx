@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Backlog from "./Backlog";
 import { Pagination } from "./Pagination";
+import { API_URL, API_TOKEN } from "../constants/constant";
 
 const fetchTasks = async (page, pageSize) => {
-  const url = `http://localhost:1337/api/tasks?filters[currentstate][Title][$eq]=Backlog&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=currentstate`;
+  const url = `${API_URL}/tasks?filters[currentstate][Title][$eq]=Backlog&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=currentstate`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${API_TOKEN}`,
+    },
+  });
   if (!response.ok) {
     const errorText = await response.text();
     console.error("Strapi fout:", errorText);
