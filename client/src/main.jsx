@@ -10,5 +10,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <BacklogApp />
     </QueryClientProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

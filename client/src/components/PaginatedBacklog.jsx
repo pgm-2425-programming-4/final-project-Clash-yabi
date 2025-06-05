@@ -11,7 +11,7 @@ const fetchTasks = async (page, pageSize) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${API_TOKEN}`,
     },
   });
   if (!response.ok) {
@@ -31,7 +31,7 @@ const PaginatedBacklog = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["tasks", currentPage, pageSize],
-    queryFn: () => fetchTasks(currentPage,pageSize),
+    queryFn: () => fetchTasks(currentPage, pageSize),
     keepPreviousData: true,
   });
 
@@ -54,7 +54,7 @@ const PaginatedBacklog = () => {
         pageSize={pageSize}
         onPageSizeChange={(size) => {
           setPageSize(size);
-          setCurrentPage(1); 
+          setCurrentPage(1);
         }}
       />
     </div>
