@@ -1,37 +1,34 @@
-import React from "react";
+import { Link } from "@tanstack/react-router";
+import "../styles/sidebar.css";
 
-const Sidebar = () => {
+
+export default function Navbar({ projects }) {
   return (
-    <nav className="sidebar">
-      <ul className="sidebar__list">
-        <li className="sidebar__item">
-          <a href="#home" className="sidebar__link sidebar__link--active">
-            Home
-          </a>
-        </li>
+    <nav className="navbar">
+      <div className="navbar__section navbar__section--links">
+        <Link to="/" className="navbar__link [&.active]:font-bold">
+          Home
+        </Link>
+        <Link to="/about" className="navbar__link [&.active]:font-bold">
+          About
+        </Link>
+      </div>
 
-        <li className="sidebar__label">PROJECTS</li>
-        <li className="sidebar__item">
-          <a href="#pgm3" className="sidebar__link">
-            PGM3
-          </a>
-        </li>
-        <li className="sidebar__item">
-          <a href="#pgm4" className="sidebar__link">
-            PGM4
-          </a>
-        </li>
-
-        <li className="sidebar__label sidebar__label--spaced">INFO</li>
-        <li className="sidebar__item">
-          <a href="#about" className="sidebar__link">
-            About
-          </a>
-        </li>
-      </ul>
+      <div className="navbar__section navbar__section--projects">
+        <span className="navbar__label">Projects :</span>
+        <ul className="navbar__project-list">
+          {projects.map((project) => (
+            <li key={project.id} className="navbar__project-item">
+              <Link
+                to={`/projects/${project.id}`}
+                className="navbar__link [&.active]:font-bold"
+              >
+                {project.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
-};
-  
-
-export default Sidebar;
+}

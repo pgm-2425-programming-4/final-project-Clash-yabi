@@ -1,0 +1,53 @@
+/* Navbar layout */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100vh;
+    background-color: #fafafa;
+    color: black;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-right: 2px solid black;
+  }
+  
+  /* Section layout */
+  .navbar__section {
+    margin-bottom: 2rem;
+  }
+  
+  .navbar__label {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: bold;
+  }
+  
+  /* Links */
+  .navbar__link {
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: opacity, transform 0.2s;
+  }
+  
+  .navbar__link:hover {
+    opacity: 0.7;
+    transform: translateX(2px);
+  }
+  
+  .navbar__section--projects {
+    margin-top: 2rem;
+  }
+  /* Project list */
+  .navbar__project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar__project-item {
+    margin-bottom: 0.25rem;
+  }
+  
