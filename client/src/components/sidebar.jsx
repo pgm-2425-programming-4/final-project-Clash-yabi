@@ -15,7 +15,7 @@ export default function Navbar({ projects }) {
       </div>
 
       <div className="navbar__section navbar__section--projects">
-        <span className="navbar__label">Projects :</span>
+        <span className="navbar__label">Projects </span>
         <ul className="navbar__project-list">
           {projects.map((project) => (
             <li key={project.id} className="navbar__project-item">

@@ -1,20 +1,20 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import Navbar from "../components/sidebar";
+import "../styles/app.css";
+const projects = [
+  { id: "pgm3", name: "PGM3" },
+  { id: "pgm4", name: "PGM4" },
+];
 
 export const Route = createRootRoute({
   component: () => (
-    <>
-      <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{" "}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
-        </Link>
+   <>
+      <Navbar projects={projects} />
+      <div className="app__content">
+        <Outlet />
+        <TanStackRouterDevtools />
       </div>
-      <hr />
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
+   </>
   ),
 });
