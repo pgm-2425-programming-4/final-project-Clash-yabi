@@ -1,0 +1,70 @@
+.project-board__columns {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding: 1rem;
+  }
+  
+  .project-board__column {
+    flex: 1;
+    min-width: 220px;
+  }
+  .task-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    height: 140px; 
+    padding: 1rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+}
+
+  .task-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    text-wrap: wrap;
+    transform: translateY(-2px);
+}
+
+  .task-card__title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  .project-board__column-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #333;
+    align-self: center;
+    padding: 0.5rem;
+    width: fit-content;
+  }
+  
+  .project-board__task-list {
+    display: flex;
+    flex-direction: column; /* 🔑 kaarten onder elkaar */
+    gap: 1rem;
+  }
+  
+  .task-card__labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  
+  .task-card__label {
+    background-color: black;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 500;
+    line-height: 1;
+  }

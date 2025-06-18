@@ -1,7 +1,6 @@
 import React from "react";
 import PaginatedBacklog from "./components/PaginatedBacklog.jsx";
-import "./styles/App.css";
-import "./styles/Pagination.css";
+// import "./styles/App.css";
 
 function BacklogApp() {
   return (
