@@ -52,7 +52,7 @@ npm install
 
 ## 💻 Server (Backend)
 
-> *(Voeg hier details toe over de gebruikte servertechnologie – zoals Express, Fastify, NestJS, enz.)*
+
 
 ### Voorbeeld:
 
@@ -64,7 +64,6 @@ npm run dev
 
 * API-endpoints voor taken, Projecten 
 *  gebruik van een database (Strapi)
-* CORS-configuratie t.b.v. frontend toegang
 
 ---
 
