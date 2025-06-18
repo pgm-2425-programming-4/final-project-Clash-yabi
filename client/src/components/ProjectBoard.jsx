@@ -4,6 +4,11 @@ import { Route } from "../routes/projects/$projectId";
 import { API_URL, API_TOKEN } from "../constants/constant";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import { TaskDialog } from "./TaskDialog.jsx";
+import { updateTask } from "../api/tasks";
+
+import { useState } from "react";
+
 import "../styles/boardheader.css"
 
 
@@ -25,12 +30,10 @@ const fetchTasksForProject = async (projectSlug) => {
   }
 
     const data = await response.json();
-    // console.log("Volledige API-response:", JSON.stringify(data, null, 2));
 
     
     return data.data?.[0]?.tasks || [];
 };
-  
   
 const fetchStatuses = async () => {
   const url = `${API_URL}/statuses?sort=order:asc`;
@@ -53,12 +56,15 @@ const fetchStatuses = async () => {
 };
 
 export default function ProjectBoard() {
+  const [selectedTask, setSelectedTask] = useState(null);
+
   const { projectId } = Route.useParams();
 
   const {
     data: tasks = [],
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["project-tasks", projectId],
     queryFn: () => fetchTasksForProject(projectId),
@@ -73,15 +79,41 @@ export default function ProjectBoard() {
     queryFn: fetchStatuses,
   });
 
+  const handleTaskSave = async (updatedTask) => {
+    console.log("➡️ Opslaan van taak met documentId:", updatedTask.documentId);
+    try {
+      // Zoek bijbehorende statusId op basis van titel
+      const statusObj = statuses.find(
+        (s) => s.Title === updatedTask.currentstate
+      );
+
+      if (!statusObj) {
+        console.error("Status niet gevonden:", updatedTask.currentstate);
+        return;
+      }
+
+      await updateTask(updatedTask.documentId, {
+        Title: updatedTask.Title,
+        Description: updatedTask.Description,
+        label: updatedTask.label || "",
+        Deadline: updatedTask.Deadline,
+        currentstate: statusObj.id,
+      });
+      await refetch();
+      setSelectedTask(null);
+    } catch (err) {
+      console.error("❌ Fout bij updaten van taak:", err.message);
+    }
+  };
+
   if (isLoading || loadingStatuses) return <p>Laden...</p>;
   if (isError || errorStatuses) return <p>Fout bij het ophalen van data.</p>;
   console.log("statuses:", statuses);
-    console.log("Tasks:", tasks);
 
   const tasksByStatus = statuses.reduce((acc, statusObj) => {
     const status = statusObj.Title;
     acc[status] = tasks.filter((t) => t.currentstate?.Title === status);
-      
+
     return acc;
   }, {});
 
@@ -117,9 +149,14 @@ export default function ProjectBoard() {
                     <TaskCard
                       key={task.id}
                       task={{
+                        id: task.id,
+                        documentId: task.documentId,
                         title: task.Title,
+                        description: task.Description,
                         labels: task.label ? [task.label] : [],
+                        currentstate: task.currentstate?.Title,
                       }}
+                      onClick={() => setSelectedTask(task)}
                     />
                   ))}
                 </div>
@@ -127,6 +164,15 @@ export default function ProjectBoard() {
             );
           })}
       </div>
+
+      {selectedTask && (
+        <TaskDialog
+          task={selectedTask}
+          statuses={statuses}
+          onClose={() => setSelectedTask(null)}
+          onSave={handleTaskSave}
+        />
+      )}
     </div>
   );
 }

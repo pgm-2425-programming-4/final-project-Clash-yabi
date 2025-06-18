@@ -11,7 +11,7 @@ function Backlog({ tasks }) {
             {task.label ? (
               <span className="backlog-task-label">{task.label}</span>
             ) : (
-            []
+              <span className="backlog-task-label">Geen label</span>
             )}
           </div>
         </div>

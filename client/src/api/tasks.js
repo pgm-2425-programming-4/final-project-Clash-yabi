@@ -27,3 +27,25 @@ export const fetchBacklogTasks = async (page, pageSize, projectSlug) => {
   const data = await response.json();
   return data;
 };
+
+
+
+export const updateTask = async (documentId, updatedFields) => {
+  const updateRes = await fetch(`${API_URL}/tasks/${documentId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+    body: JSON.stringify({
+      data: updatedFields,
+    }),
+  });
+
+  if (!updateRes.ok) {
+    const err = await updateRes.text();
+    throw new Error("Fout bij bijwerken taak: " + err);
+  }
+
+  return await updateRes.json();
+};

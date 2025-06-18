@@ -6,5 +6,6 @@ export const Route = createFileRoute("/projects/$projectId/backlog")({
 });
 
 function RouteComponent() {
-  return <PaginatedBacklog />;
+  return <PaginatedBacklog
+  />;
 }

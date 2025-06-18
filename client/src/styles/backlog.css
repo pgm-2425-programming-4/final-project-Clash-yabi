@@ -13,6 +13,7 @@
     width: 240px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.2s ease;
+    cursor: pointer;
   }
   
   .backlog-task-card:hover {
@@ -24,6 +25,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     color: #333333;
+    padding-bottom: .5rem;
   }
   
   .backlog-task-labels {
@@ -33,10 +35,12 @@
   }
   
   .backlog-task-label {
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
+    background-color: black;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 500;
+    line-height: 1;
   }
   
