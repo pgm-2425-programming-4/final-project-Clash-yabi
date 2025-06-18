@@ -1,11 +1,14 @@
+@import url("./reset.css");
+@import url("./Pagination.css");
+
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
-  color: #333;
   background-color: #fafafa;
   margin: 0;
-  padding: 1rem;
 }
 
 .task-table {
@@ -38,4 +41,16 @@ body {
 
 .task-body .task-row:last-child td {
   border-bottom: none;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app__content {
+  flex: 1;
+  background-color: #fafafa;
+  color: black;
+  overflow-y: auto;
 }

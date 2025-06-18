@@ -1,37 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Backlog from "./Backlog";
+import Backlog from "./BacklogView.jsx";
 import { Pagination } from "./Pagination";
-import { API_URL, API_TOKEN } from "../constants/constant";
-
-const fetchTasks = async (page, pageSize) => {
-  const url = `${API_URL}/tasks?filters[currentstate][Title][$eq]=Backlog&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=currentstate`;
-
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${API_TOKEN}`,
-    },
-  });
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Strapi fout:", errorText);
-    throw new Error("Fout bij het ophalen van taken");
-  }
-
-  const data = await response.json();
-  return data;
-};
-
+import { fetchBacklogTasks } from "../api/tasks.js";
+import { Route } from "../routes/projects/$projectId/backlog";
 const PaginatedBacklog = () => {
+  const { projectId } = Route.useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+  console.log("🚀 projectId:", projectId);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["tasks", currentPage, pageSize],
-    queryFn: () => fetchTasks(currentPage, pageSize),
+    queryKey: ["tasks", projectId, currentPage, pageSize],
+    queryFn: () => fetchBacklogTasks(currentPage, pageSize, projectId),
     keepPreviousData: true,
   });
 
@@ -46,6 +28,7 @@ const PaginatedBacklog = () => {
 
   return (
     <div>
+      <h1>Backlog voor project: {projectId.toUpperCase()}</h1>
       <Backlog tasks={data.data} />
       <Pagination
         currentPage={currentPage}
