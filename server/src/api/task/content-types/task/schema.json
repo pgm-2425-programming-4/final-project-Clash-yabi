@@ -25,6 +25,15 @@
     },
     "Deadline": {
       "type": "date"
+    },
+    "label": {
+      "type": "string"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "tasks"
     }
   }
 }
