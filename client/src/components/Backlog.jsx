@@ -1,28 +1,28 @@
 import React from "react";
+import { Route } from "../routes/projects/$projectid/backlog.jsx";
+import { useQuery } from "@tanstack/react-query";
+import { fetchBacklogTasks } from "../api/tasks.js";
 
-const Backlog = ({ tasks }) => {
+function Backlog() {
+  const { projectId } = Route.useParams(); // gebruik juiste naam!
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["backlog", projectId],
+    queryFn: () => fetchBacklogTasks(projectId),
+  });
+
+  if (isLoading) return <p>Laden...</p>;
+  if (isError) return <p>Fout bij ophalen.</p>;
+
   return (
-    <table className="task-table">
-      <thead className="task-header">
-        <tr>
-          <th>Titel</th>
-          <th>Beschrijving</th>
-          <th>Deadline</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody className="task-body">
-        {tasks.map((task) => (
-          <tr key={task.id} className="task-row">
-            <td>{task.Title}</td>
-            <td>{task.Description}</td>
-            <td>{new Date(task.Deadline).toLocaleDateString("nl-BE")}</td>
-            <td>{task.currentstate?.Title ?? "Geen status"}</td>
-          </tr>
+    <div>
+      <h1>Backlog – {projectId.toUpperCase()}</h1>
+      <ul>
+        {data?.data.map((task) => (
+          <li key={task.id}>{task.attributes.Title}</li>
         ))}
-      </tbody>
-    </table>
+      </ul>
+    </div>
   );
-};
-
+}
 export default Backlog;

@@ -6,7 +6,7 @@ export default function TaskCard({ task }) {
       <div className="task-card__labels">
         {task.labels.map((label, i) => (
           <span key={i} className="task-card__label">
-            {label}
+            {label || "No Label"}
           </span>
         ))}
       </div>
