@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import PaginatedBacklog from "../../../components/PaginatedBacklog";
 
-export const Route = createFileRoute("/projects/$temp/backlog")({
+export const Route = createFileRoute("/projects/$projectId/backlog")({
   component: RouteComponent,
 });
 

@@ -25,7 +25,7 @@ const fetchTasksForProject = async (projectSlug) => {
   }
 
     const data = await response.json();
-    console.log("Volledige API-response:", JSON.stringify(data, null, 2));
+    // console.log("Volledige API-response:", JSON.stringify(data, null, 2));
 
     
     return data.data?.[0]?.tasks || [];
@@ -96,7 +96,7 @@ export default function ProjectBoard() {
           <button className="project-board__button project-board__button--add">
             Add new task
           </button>
-          <Link to="/projects/$projectid/backlog" params={{ projectId }}>
+          <Link to={`/projects/${projectId}/backlog`}>
             <button className="project-board__button project-board__button--backlog">
               View backlog
             </button>

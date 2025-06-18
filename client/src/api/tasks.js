@@ -1,16 +1,14 @@
 import { API_URL, API_TOKEN } from "../constants/constant";
 
 
-export const fetchBacklogTasks = async (page, pageSize, projectId) => {
-    if (!page || !pageSize || !projectId) {
-      console.error("⚠️ fetchBacklogTasks: ontbrekende parameter(s)");
-      console.log({ page, pageSize, projectId });
-      throw new Error(
-        "fetchBacklogTasks: één of meer parameters zijn undefined"
-      );
-    }
-      
-  const url = `${API_URL}/tasks?filters[currentstate][Title][$eq]=Backlog&filters[project][id][$eq]=${projectId}&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`;
+export const fetchBacklogTasks = async (page, pageSize, projectSlug) => {
+  if (!page || !pageSize || !projectSlug) {
+    console.error("⚠️ fetchBacklogTasks: ontbrekende parameter(s)");
+    console.log({ page, pageSize, projectSlug });
+    throw new Error("fetchBacklogTasks: één of meer parameters zijn undefined");
+  }
+
+  const url = `${API_URL}/tasks?filters[currentstate][Title][$eq]=Backlog&filters[project][slug][$eq]=${projectSlug}&pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`;
 
   const response = await fetch(url, {
     method: "GET",

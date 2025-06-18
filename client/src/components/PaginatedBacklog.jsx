@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Backlog from "./Backlog";
+import Backlog from "./BacklogView.jsx";
 import { Pagination } from "./Pagination";
-import { Route } from "../routes/projects/$projectid/backlog.jsx";
 import { fetchBacklogTasks } from "../api/tasks.js";
-
+import { Route } from "../routes/projects/$projectId/backlog";
 
 const PaginatedBacklog = () => {
-  const { projectid } = Route.useParams();
-  const projectId = projectid;
+  const { projectId } = Route.useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+  console.log("🚀 projectId:", projectId);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["tasks", projectId, currentPage, pageSize],
     queryFn: () => fetchBacklogTasks(currentPage, pageSize, projectId),
     keepPreviousData: true,
   });
+  console.log("📡 Fetch params:", { currentPage, pageSize, projectId });
 
   useEffect(() => {
     if (data?.meta?.pagination?.pageCount) {
@@ -32,6 +32,7 @@ const PaginatedBacklog = () => {
     <div>
       <h1>Backlog voor project: {projectId}</h1>
       <Backlog tasks={data.data} />
+      {console.log(data)}
       <Pagination
         currentPage={currentPage}
         pageCount={pageCount}
